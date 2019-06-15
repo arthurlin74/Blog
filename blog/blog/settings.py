@@ -25,7 +25,7 @@ SECRET_KEY = 'ura+j^3%qz*_mcn&qo!)8-87kv!-m&+n0lrx!l*-c%!+!8t-g7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
+
 ALLOWED_HOSTS = ['*']
 
 
@@ -40,22 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'article',
     'main', 
-=======
-ALLOWED_HOSTS = []
-
-
-# Application definition
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'main',
->>>>>>> branch 'master' of https://github.com/arthurlin74/blog
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

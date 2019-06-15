@@ -3,15 +3,11 @@ from main import views
 
 
 app_name = 'main'
-<<<<<<< HEAD
 
 urlpatterns = [
     path('',views.main, name='main'),
-    path('about/',views.about,name='about')
+    path('about/',views.about,name='about'),
+#     path('aticle/',views.article,name='article')
 ]
 
-=======
-urlpatterns = [
-    path('', views.main, name='main'),
-]
->>>>>>> branch 'master' of https://github.com/arthurlin74/blog
+
