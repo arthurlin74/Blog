@@ -12,8 +12,10 @@
 <h2>歡迎來到我的部落格</h2>
 
 {% include 'main/messages.html' %}
+{% include 'article/searchForm.html' %}
 
-<p><a class="btn" href="{% url 'article:articleCreate' %}">新增文章</a></p>
+<p class="inlineBlock"><a class="btn" href="{% url 'article:articleCreate' %}">新增文章</a></p>
+<br><br><hr>
 {% for article, comments in articles.items %}
   <h3 class="inlineBlock"><a href="{% url 'article:articleRead' article.id %}">{{ article.title }}</a></h3>
     <form class="inlineBlock" method="post" action="{% url 'article:articleDelete' article.id %}">
@@ -31,7 +33,7 @@
   {% endfor %}
   <hr>
 {% endfor %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src={% static 'main/js/deleteConfirm.js' %}></script>
 </body>
 </html>
