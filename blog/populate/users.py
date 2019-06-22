@@ -1,9 +1,9 @@
 from populate import base
-from accounts.models import User
+from account.models import User
 
 
 def populate(): 
-    print('Creating user accounts ... ', end='')
+    print('Creating user account ... ', end='')
     User.objects.exclude(is_superuser=True).delete()
     for i in range(5):
         username = 'user' + str(i)

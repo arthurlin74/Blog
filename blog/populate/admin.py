@@ -1,5 +1,5 @@
 from populate import base
-from accounts.models import User
+from account.models import User
 
 
 def populate(): 
