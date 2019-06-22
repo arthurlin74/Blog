@@ -1,15 +1,11 @@
-<!doctype html>
+{% extends 'main/base.html' %}
 {% load staticfiles %}
-<html>
-<head>
-<title>部落格</title>
-<meta charset="utf-8">
-<link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+{% block css %}
 <link rel="stylesheet" href="{% static 'article/css/article.css' %}">
-</head>
-<body>
-{% include 'main/menu.html' %}
-<h2>歡迎來到我的部落格</h2>
+
+{% endblock %}
+{% block heading %}歡迎蒞臨{% endblock %}
+{% block content %}
 
 {% include 'main/messages.html' %}
 {% include 'article/searchForm.html' %}
@@ -33,7 +29,8 @@
   {% endfor %}
   <hr>
 {% endfor %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{% endblock %}
+{% block script %}
+
 <script src={% static 'main/js/deleteConfirm.js' %}></script>
-</body>
-</html>
+{% endblock %}
