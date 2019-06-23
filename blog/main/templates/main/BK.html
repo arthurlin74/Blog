@@ -3,4 +3,16 @@
 這是註解的方法之一
 意義是範本引擎不處理
 
+以下是重要筆記
+
+#postgres重建資料庫方法
+cd C:\Program Files\PostgreSQL\11\bin
+psql -U postgres -c "drop database blogdb"
+Password for user postgres:
+DROP DATABASE
+psql -U postgres -c "create database blogdb"
+CREATE DATABASE
+psql -U postgres -c "grant all privileges on database blogdb to blog
+GRANT
+
 {% endcomment %}
