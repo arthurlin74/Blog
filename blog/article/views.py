@@ -101,3 +101,35 @@ def articleSearch(request):
                                       Q(content__icontains=searchTerm))
     context = {'articles':articles} 
     return render(request, 'article/articleSearch.html', context)
+
+def articleLike(request, articleId):
+    '''
+    Add the user to the 'likes' field:
+        1. Get the article; redirect to 404 if not found
+        2. If the user does not exist in the "likes" field, add him/her
+        3. Finally, call articleRead() function to render the article
+    '''
+    article = get_object_or_404(Article, id=articleId)
+    if request.user not in article.likes.all():
+        article.likes.add(request.user)
+    return articleRead(request, articleId)
+
+def commentCreate(request, articleId):
+    '''
+    Create a comment for an article:
+        1. Get the "comment" from the HTML form
+        2. Store it to database
+    '''
+    if request.method == 'GET':
+        return articleRead(request, articleId)
+
+    # POST
+    comment = request.POST.get('comment')
+    if comment:
+        comment = comment.strip()
+    if not comment:
+        return redirect('article:articleRead', articleId=articleId)
+
+    article = get_object_or_404(Article, id=articleId)
+    Comment.objects.create(article=article, user=request.user, content=comment)
+    return redirect('article:articleRead', articleId=articleId)
