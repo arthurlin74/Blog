@@ -4,7 +4,7 @@ from article.forms import ArticleForm
 from django.contrib import messages
 from django.db.models.query_utils import Q
 from django.contrib.auth.decorators import login_required
-
+from main.views import admin_required
 # Create your views here.
 
 
@@ -18,7 +18,7 @@ def article(request):
     context = {'articles':articles}
     return render(request, 'article/article.html',context)
 
-
+@admin_required
 def articleCreate(request):
     '''
     Create a new article instance
@@ -58,7 +58,7 @@ def articleRead(request, articleId):
     }
     return render(request, 'article/articleRead.html', context)
 
-
+@admin_required
 def articleUpdate(request, articleId):
     '''
     Update the article instance:
@@ -82,7 +82,7 @@ def articleUpdate(request, articleId):
     messages.success(request, '文章已修改') 
     return redirect('article:articleRead', articleId=articleId)
 
-
+@admin_required
 def articleDelete(request, articleId):
     '''
     Delete the article instance:

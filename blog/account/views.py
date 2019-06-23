@@ -30,7 +30,7 @@ def login(request):
     '''
     template = 'account/login.html'
     if request.method == 'GET':
-        return render(request, template)
+        return render(request, template, {'nextURL':request.GET.get('next')})
 
     # POST
     username = request.POST.get('username')
@@ -46,6 +46,9 @@ def login(request):
 
     # login success
     auth_login(request, user)
+    nextURL = request.POST.get('nextURL')
+    if nextURL:
+        return redirect(nextURL)
     messages.success(request, '登入成功')
     return redirect('main:main')
 
