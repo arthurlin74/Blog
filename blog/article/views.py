@@ -3,7 +3,11 @@ from django.shortcuts import render,redirect,get_object_or_404
 from article.forms import ArticleForm
 from django.contrib import messages
 from django.db.models.query_utils import Q
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+
+
 def article(request):
     '''
     Render the article page
@@ -13,6 +17,7 @@ def article(request):
         articles.update({article:Comment.objects.filter(article=article)})
     context = {'articles':articles}
     return render(request, 'article/article.html',context)
+
 
 def articleCreate(request):
     '''
@@ -38,6 +43,7 @@ def articleCreate(request):
     return redirect('article:article')
 #產生一個articleform 表單類別
 
+
 def articleRead(request, articleId):
     '''
     Read an article
@@ -51,6 +57,7 @@ def articleRead(request, articleId):
         'comments': Comment.objects.filter(article=article)
     }
     return render(request, 'article/articleRead.html', context)
+
 
 def articleUpdate(request, articleId):
     '''
@@ -75,6 +82,7 @@ def articleUpdate(request, articleId):
     messages.success(request, '文章已修改') 
     return redirect('article:articleRead', articleId=articleId)
 
+
 def articleDelete(request, articleId):
     '''
     Delete the article instance:
@@ -90,6 +98,7 @@ def articleDelete(request, articleId):
     messages.success(request, '文章已刪除')  
     return redirect('article:article')
 
+
 def articleSearch(request):
     '''
     Search for articles:
@@ -102,6 +111,7 @@ def articleSearch(request):
     context = {'articles':articles} 
     return render(request, 'article/articleSearch.html', context)
 
+@login_required
 def articleLike(request, articleId):
     '''
     Add the user to the 'likes' field:
@@ -114,6 +124,7 @@ def articleLike(request, articleId):
         article.likes.add(request.user)
     return articleRead(request, articleId)
 
+@login_required
 def commentCreate(request, articleId):
     '''
     Create a comment for an article:
@@ -126,7 +137,7 @@ def commentCreate(request, articleId):
     # POST
     comment = request.POST.get('comment')
     if comment:
-        comment = comment.strip()
+        comment = comment.strip() #清除前後空白
     if not comment:
         return redirect('article:articleRead', articleId=articleId)
 
@@ -134,6 +145,7 @@ def commentCreate(request, articleId):
     Comment.objects.create(article=article, user=request.user, content=comment)
     return redirect('article:articleRead', articleId=articleId)
 
+@login_required
 def commentUpdate(request, commentId):
     '''
     Update a comment:
@@ -160,6 +172,7 @@ def commentUpdate(request, commentId):
         commentToUpdate.save()
     return redirect('article:articleRead', articleId=article.id)
 
+@login_required
 def commentDelete(request, commentId):
     '''
     Delete a comment:
